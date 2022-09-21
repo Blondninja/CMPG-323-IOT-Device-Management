@@ -3,6 +3,16 @@ using System.Linq.Expressions;
 using System;
 using DeviceManagement_WebApp.Data;
 
+
+using DeviceManagement_WebApp.Data;
+using DeviceManagement_WebApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace DeviceManagement_WebApp.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
