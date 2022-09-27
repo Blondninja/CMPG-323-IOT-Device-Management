@@ -23,7 +23,8 @@ namespace DeviceManagement_WebApp.Controllers
         // GET: Zones
         public async Task<IActionResult> Index()
         {
-            return View(_zonesRepository.GetAll());
+            await _zonesRepository.SaveChanges();
+            return View(_zonesRepository.GetAll()); 
         }
 
         // GET: Zones/Details/5
@@ -34,13 +35,13 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = await _zonesRepository.Zone
-                .FirstOrDefaultAsync(m => m.ZoneId == id);
+            var zone = _zonesRepository.GetById((Guid)id);
             if (zone == null)
             {
                 return NotFound();
             }
 
+            await _zonesRepository.SaveChanges();
             return View(zone);
         }
 
@@ -59,8 +60,8 @@ namespace DeviceManagement_WebApp.Controllers
         {
             zone.ZoneId = Guid.NewGuid();
             _zonesRepository.Add(zone);
-            await _zonesRepository.SaveChangesAsync();
 
+            await _zonesRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
@@ -72,11 +73,13 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = await _zonesRepository.Zone.FindAsync(id);
+            var zone = _zonesRepository.GetById((Guid)id);
             if (zone == null)
             {
                 return NotFound();
             }
+
+            await _zonesRepository.SaveChanges();
             return View(zone);
         }
 
@@ -95,7 +98,6 @@ namespace DeviceManagement_WebApp.Controllers
             try
             {
                 _zonesRepository.Update(zone);
-                await _zonesRepository.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -108,6 +110,7 @@ namespace DeviceManagement_WebApp.Controllers
                     throw;
                 }
             }
+            await _zonesRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
 
         }
@@ -120,13 +123,12 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = await _zonesRepository.Zone
-                .FirstOrDefaultAsync(m => m.ZoneId == id);
+            var zone = _zonesRepository.GetById((Guid)id);
             if (zone == null)
             {
                 return NotFound();
             }
-
+            await _zonesRepository.SaveChanges();
             return View(zone);
         }
 
@@ -135,15 +137,16 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var zone = await _zonesRepository.Zone.FindAsync(id);
-            _zonesRepository.Zone.Remove(zone);
-            await _zonesRepository.SaveChangesAsync();
+            var zone = _zonesRepository.GetById((Guid)id);
+            _zonesRepository.Remove(zone);
+
+            await _zonesRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ZoneExists(Guid id)
         {
-            return _zonesRepository.Zone.Any(e => e.ZoneId == id);
+            return _zonesRepository.Exists(id);
         }
     }
 }

@@ -2,17 +2,9 @@
 using System.Linq.Expressions;
 using System;
 using DeviceManagement_WebApp.Data;
-
-
-using DeviceManagement_WebApp.Data;
-using DeviceManagement_WebApp.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-
 
 namespace DeviceManagement_WebApp.Repository
 {
@@ -35,11 +27,11 @@ namespace DeviceManagement_WebApp.Repository
         {
             return _context.Set<T>().Where(expression);
         }
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _context.Set<T>().ToList();
         }
-        public T GetById(int id)
+        public virtual T GetById(Guid? id)
         {
             return _context.Set<T>().Find(id);
         }
@@ -51,6 +43,22 @@ namespace DeviceManagement_WebApp.Repository
         {
             _context.Set<T>().RemoveRange(entities);
         }
+
+        public void Update(T entity)
+        {
+            _context.Update(entity);
+            _context.SaveChanges();
+        }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public bool Exists(Guid? id)
+        {
+            return _context.Set<T>().Find(id) != null;
+        }
+
     }
 }
-

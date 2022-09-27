@@ -1,35 +1,25 @@
 ﻿using DeviceManagement_WebApp.Data;
-using DeviceManagement_WebApp.Models;
+using DeviceManagement_WebApp.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+using DeviceManagement_WebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace DeviceManagement_WebApp.Repository
 {
-    public class CategoriesRepository
+    public class CategoriesRepository : GenericRepository<Category>, ICategoriesRepository
     {
-        private readonly ConnectedOfficeContext _context;
 
-        // GET: Categories
-        public List<Category> GetAll()
+        public CategoriesRepository(ConnectedOfficeContext context) : base(context)
         {
-            return _context.Category.ToList();
         }
 
-        // GET: Categories/Details/5
-        public async Task<Category> GetById(Guid? id)
+        public Category GetMostRecentService()
         {
-            
-
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            
-
-            return (category);
+            return _context.Category.OrderByDescending(category => category.DateCreated).FirstOrDefault();
         }
-
     }
 }
