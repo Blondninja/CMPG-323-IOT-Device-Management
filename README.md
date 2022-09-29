@@ -13,6 +13,7 @@ the following :
 ![loggings](https://user-images.githubusercontent.com/110628936/193011766-8c813d23-a5b1-424b-8fe2-461af7a130da.png)
 
 where you can register yourself with your email id and a strong password, once you have logged in , you can also log out easily.
+and if you forgot the password you can also retrieve it and also add as a new user as well
 
 ![output](https://user-images.githubusercontent.com/110628936/193011901-212d4895-fe5a-4fea-aa1f-a70263999000.png)
 
