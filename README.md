@@ -38,6 +38,7 @@ delete icon where it will delete data permanently and will no longer be found
 ![azure](https://user-images.githubusercontent.com/110628936/193012602-1a886058-183c-472e-ac77-7055359e3424.png)
 
 this indicates that that  hosting on azure has been successfully done , it has been successfully published.
+viewing according to the url provided in the screenshot
 
 REFERENCES:
 
