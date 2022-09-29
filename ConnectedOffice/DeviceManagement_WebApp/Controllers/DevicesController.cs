@@ -29,7 +29,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View(devices);
         }
 
-        // GET: Devices/Details/5
+        //  GET method that creates all devices entries  from the database
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -46,7 +46,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View(device);
         }
 
-        // GET: Create a new Device entry on the database
+        // GET method Create a new Device entry on the database
 
         public IActionResult Create()
         {
@@ -55,7 +55,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View();
         }
 
-        // POST: Devices/Create. Create a new Device entry on thedatabase
+        // POST method  Create a new Device entry on the database
                 [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DeviceId,DeviceName,CategoryId,ZoneId,Status,IsActive,DateCreated")] Device device)
@@ -66,7 +66,7 @@ namespace DeviceManagement_WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: will update an existing Device entry on the database
+        // GET method  will update an existing Device entry on the database
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -85,7 +85,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View(device);
         }
 
-        // POST: will update an existing Device entry on the database
+        // POST method  will update an existing Device entry on the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("DeviceId,DeviceName,CategoryId,ZoneId,Status,IsActive,DateCreated")] Device device)
@@ -133,7 +133,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View(device);
         }
 
-        // POST: create a new Device entry on the database
+        // POST method  create a new Device entry on the database
                 [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

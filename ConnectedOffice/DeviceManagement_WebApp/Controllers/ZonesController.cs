@@ -20,14 +20,14 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
 
-        // GET: Zones
+        //  get methods for zones 
         public async Task<IActionResult> Index()
         {
             await _zonesRepository.SaveChanges();
             return View(_zonesRepository.GetAll()); 
         }
 
-        // GET: Zones/Details/5
+        // GET method that details all zones  entries  from the database
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -45,15 +45,14 @@ namespace DeviceManagement_WebApp.Controllers
             return View(zone);
         }
 
-        // GET: Zones/Create
+        // GET method that creates all zones  entries  from the database
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Zones/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //  post  method that will create a new zone  entry on the database
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
@@ -65,7 +64,7 @@ namespace DeviceManagement_WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Zones/Edit/5
+        //  GET method that edits  all zones  entries  from the database
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -83,9 +82,8 @@ namespace DeviceManagement_WebApp.Controllers
             return View(zone);
         }
 
-        // POST: Zones/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //  post  method that will edit a new zone  entry on the database
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
@@ -115,7 +113,7 @@ namespace DeviceManagement_WebApp.Controllers
 
         }
 
-        // GET: Zones/Delete/5
+        //  GET method that delete all zones  entries  from the database
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -132,7 +130,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View(zone);
         }
 
-        // POST: Zones/Delete/5
+        //  post  method that will delete a new zone  entry on the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

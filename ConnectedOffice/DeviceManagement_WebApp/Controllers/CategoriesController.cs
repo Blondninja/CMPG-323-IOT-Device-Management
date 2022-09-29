@@ -21,13 +21,13 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
 
-        // GET: Categories
+        //  GET method that retrieves all categories entries  from the database
         public async Task<IActionResult> Index()
         {
             return View( _categoriesRepository.GetAll());
         }
 
-        // GET: Categories/Details/5
+        // GET method that retrieves all categories details  entries from the database
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -44,15 +44,14 @@ namespace DeviceManagement_WebApp.Controllers
             return View(category);
         }
 
-        // GET: Categories/Create
+        // GET method that create all categories  entries from the database
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //  post  method that will create   a new category entry on the database
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
@@ -63,7 +62,7 @@ namespace DeviceManagement_WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Categories/Edit/5
+        // GET method that edits all categories  entries from the database
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -79,9 +78,8 @@ namespace DeviceManagement_WebApp.Controllers
             return View(category);
         }
 
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // post  method that will edit   a new category entry on the database
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
@@ -109,7 +107,7 @@ namespace DeviceManagement_WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Categories/Delete/5
+        // GET method that delete all categories  entries from the database
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -128,7 +126,7 @@ namespace DeviceManagement_WebApp.Controllers
             return View(category);
         }
 
-        // POST: Categories/Delete/5
+        // post  method that will delete  a new category entry on the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
